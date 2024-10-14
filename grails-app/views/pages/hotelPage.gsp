@@ -26,6 +26,10 @@
 
             </g:each>
         </ul>
+        <div class="paginationMenu">
+            <button class="paginationButton" onclick="changePage('prev')"><</button>
+            <button class="paginationButton" onclick="changePage('next')">> </button>
+        </div>
     </div>
 
     <button name="createNew" id="openModal" onclick="openForm(this)">Добавить новый отель</button>

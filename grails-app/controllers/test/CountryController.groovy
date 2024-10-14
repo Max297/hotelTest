@@ -3,70 +3,48 @@ package test
 import grails.gorm.transactions.Transactional
 import grails.rest.RestfulController
 
-class CountryController extends RestfulController{
+class CountryController {
 
     static responseFormats = ['json', 'xml']
-    CountryController(){
-        super(Country);
-    }
+    def countryService
 
-    def get(Long id){
-        respond Country.get(id);
-    }
 
-    @Transactional
     def delete() {
-        def country = Country.get(params.id)
+        Long countryId = params.long("id")
 
+        String resMessage=countryService.deleteCountry(countryId)
 
-        country.delete(flush: true)
 
         Map<String, Integer> result = new HashMap<>();
-        result.put("message","works")
+        result.put("message",resMessage)
         respond (result)
     }
 
-    @Transactional
     def add() {
-        Country created = new Country(countryName: params.name, countryCapital: params.capital);
-        def result=created.save(flush: true)
 
 
+        def name=params.name
+
+        def capital=params.capital
+
+        def resMessage=countryService.addCountry(name,capital)
 
         Map<String, String> message = new HashMap<>();
-        if (result!=null){
-
-            message.put("message","saved")
-
-        }
-        else{
-
-            message.put("message","validation failed")
-
-        }
+        message.put("message",resMessage)
         respond (message)
+
+
     }
-    @Transactional
+
     def update() {
-        Country created = Country.get(params.id)
+        Long countryId = params.long("id")
+        String name=params.name
+        String capital=params.capital
 
-        created.setProperty("countryName", params.name)
-        created.setProperty("countryCapital", params.capital)
-
-        def result=created.save(flush: true)
-
+        def resMessage=countryService.updateCountry(countryId,name, capital )
 
         Map<String, String> message = new HashMap<>();
-        if (result!=null){
-
-            message.put("message","saved")
-
-        }
-        else{
-
-            message.put("message","validation failed")
-
-        }
+        message.put("message",resMessage)
         respond (message)
     }
 }

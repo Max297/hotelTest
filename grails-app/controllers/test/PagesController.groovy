@@ -1,53 +1,44 @@
 package test
 
+
 class PagesController {
+    def countryService;
+    def hotelService;
 
     def index() {
-        def found=Country.getAll();
+        def found= countryService.findAll()
 
 
         respond([countries: found])
     }
     def search() {
-        def name="%"+params.name+"%";
-        def countryId =params.country;
-        if (countryId!="all") {
-            Country hotelCountry = Country.get(countryId);
-
-            def cri = Hotel.createCriteria()
-            def result = cri.list {
-                like("hotelName", name)
-                and {
-                    eq("hotelCountry", hotelCountry)
-                }
-                order('hotelStars', 'desc')
-                order('hotelName', 'asc')
-            }
+        String name=params.name;
+        if (params.country=="all"){
+            def result=hotelService.findByName(name)
             respond([hotels:result]);
         }
         else{
-            def cri = Hotel.createCriteria()
-            def result = cri.list {
-                like("hotelName", name)
-                order('hotelStars', 'desc')
-                order('hotelName', 'asc')
-            }
+            Long countryId =params.long("country");
+
+            Country hotelCountry = countryService.findById(countryId);
+            def result=hotelService.findByNameCountry(name, hotelCountry)
             respond([hotels:result]);
         }
+
+
 
 
 
     }
     def hotelPage(){
-        def found=Hotel.getAll();
-        def countries=Country.getAll();
+        def found=hotelService.findAll();
 
-
+        def countries= countryService.findAll()
 
         respond([hotels: found, countries: countries, dbCall:Country])
     }
     def countryPage(){
-        def found=Country.getAll();
+        def found= countryService.findAll()
 
 
         respond([countries: found])

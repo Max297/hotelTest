@@ -1,4 +1,14 @@
-
+.paginationButton{
+    font-size: 32px;
+    background: none;
+    letter-spacing: 0.1em;
+    line-height: 30px;
+}
+.paginationMenu{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
 .listElem{
     display: flex;
 }

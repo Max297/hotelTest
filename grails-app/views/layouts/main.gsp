@@ -17,16 +17,21 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <ul style="color: white">
+        <li>
+            <a href="http://localhost:8080">Страница поиска</a>
+        </li>
+        <li>
+            <a href="http://localhost:8080/countryPage">Список стран</a>
+        </li>
+        <li>
+            <a href="http://localhost:8080/hotelPage">Список отелей</a>
+        </li>
+        <li>
+            <a href="http://localhost:8080/h2-console/">Консоль h2</a>
+        </li>
 
-    <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
-        <ul class="nav navbar-nav ml-auto">
-            <g:pageProperty name="page.nav"/>
-        </ul>
-    </div>
+    </ul>
 
 </nav>
 

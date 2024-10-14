@@ -5,8 +5,55 @@ const modal = document.getElementById("modal");
 
 const span = document.getElementById("closeModal");
 
+var perPage=3
+var numberShown=0
+function changePage(type){
+    let elems=document.getElementsByClassName("listElem")
+    let newNum=numberShown
+    if (type=="next" && numberShown<elems.length )  {
+        newNum+=perPage
+        for(let i=0;i<elems.length;i++){
+
+            if (i>=numberShown && i<newNum){
+
+                elems[i].style.display=""
+            }
+            else{
+                elems[i].style.display="none"
+            }
+        }
+
+    }
+    else if (type=="prev" && numberShown>perPage){
+        newNum-=perPage
+        console.log(newNum)
+        for(let i=0;i<elems.length;i++){
+            if (i<newNum && i>=newNum-perPage){
+                elems[i].style.display=""
+            }
+            else{
+                elems[i].style.display="none"
+            }
+        }
+    }
+    else if(type=="refresh"){
+        for(let i=0;i<elems.length;i++){
+
+            if (i>=numberShown-perPage && i<numberShown){
+
+                elems[i].style.display=""
+            }
+            else{
+                elems[i].style.display="none"
+            }
+        }
+    }
+    numberShown=newNum
 
 
+}
+
+changePage("next")
 
 span.onclick = function() {
     modal.style.display = "none";
@@ -101,6 +148,7 @@ function del(elem){
         },
         success: function (data, status, xhr) {
             elem.parentElement.remove()
+            changePage('refresh')
         }
     });
 }

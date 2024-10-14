@@ -1,9 +1,9 @@
 package test
 
-import grails.testing.web.controllers.ControllerUnitTest
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class PagesControllerSpec extends Specification implements ControllerUnitTest<PagesController> {
+class CountryServiceSpec extends Specification implements ServiceUnitTest<CountryService>{
 
     def setup() {
     }

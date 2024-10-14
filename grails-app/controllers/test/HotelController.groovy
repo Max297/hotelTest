@@ -3,98 +3,53 @@ package test
 import grails.gorm.transactions.Transactional
 import grails.rest.RestfulController
 
-class HotelController extends RestfulController{
+class HotelController {
     static responseFormats = ['json', 'xml']
 
-    HotelController(){
-        super(Hotel);
-    }
-
-
-    def findHotel() {
-        def name="%"+params.name+"%";
-        def countryId =params.country;
-
-        Country hotelCountry=Country.get(countryId);
-
-
-        respond Hotel.findAllByHotelNameIlikeAndHotelCountry("%${name}%", hotelCountry)
+    def hotelService
+    def countryService
 
 
 
-    }
-    @Transactional
     def delete() {
-        def hotel = Hotel.get(params.id)
 
-
-        hotel.delete(flush: true)
+        Long hotelId=params.long("id")
+        def resMessage=hotelService.deleteHotel(hotelId)
 
         Map<String, Integer> result = new HashMap<>();
-        result.put("message","works")
+        result.put("message",resMessage)
         respond (result)
     }
 
-    @Transactional
     def add() {
-        def country = Country.get(params.country)
 
+        Long countryId=params.long("country")
+        def name=params.name
+        def stars=params.int("stars")
         def url=params.url
-        if (url.trim()==""){
-            url=null
-        }
-        Hotel created = new Hotel(hotelName:params.name, hotelCountry:country, hotelStars:params.stars, hotelUrl:url);
 
-        def result= created.save(flush: true)
-
+        Country foundCountry= countryService.findById(countryId)
+        def resMessage=hotelService.addHotel(foundCountry,name,stars,url)
 
         Map<String, String> message = new HashMap<>();
-        if (result!=null){
-
-            message.put("message","saved")
-
-        }
-        else{
-
-            message.put("message","validation failed")
-
-        }
+        message.put("message",resMessage)
         respond (message)
 
-
-
     }
-    @Transactional
     def update() {
-        Hotel created = Hotel.get(params.id)
-        def country = Country.get(params.country)
-
-        def url=params.url
-        if (url.trim()==""){
-            url=null
-        }
-
-        created.setProperty("hotelName", params.name)
-        created.setProperty("hotelCountry", country)
-        created.setProperty("hotelStars", Integer.parseInt(params.stars))
-        created.setProperty("hotelUrl",url)
+        Long hotelId=params.long("id")
+        Long countryId=params.long("country")
+        String name=params.name
+        Integer stars=params.int("stars")
+        String url=params.url
 
 
 
-        def result= created.save(flush: true,failOnError: true )
-
+        Country foundCountry= countryService.findById(countryId)
+        def resMessage=hotelService.updateHotel(hotelId,foundCountry,name,stars,url)
 
         Map<String, String> message = new HashMap<>();
-        if (result!=null){
-
-            message.put("message","saved")
-
-        }
-        else{
-
-            message.put("message","validation failed")
-
-        }
+        message.put("message",resMessage)
         respond (message)
     }
 }
