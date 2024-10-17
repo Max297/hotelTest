@@ -7,32 +7,44 @@
 </head>
 
 <asset:stylesheet src="apiPages.css"/>
-<div id="content" role="main">
+<div id="content" role="main" class="listCont">
     <section class="row colset-2-its">
         <h1>Список отелей </h1>
     </section>
     <div>
-        <ul>
-            <g:each in="${hotels}" var="hotel">
-                <li class="listElem" id="${hotel.getId()}">
+
+        <g:each in="${hotels}" var="hotel">
+            <div class="listElem" id="${hotel.getId()}">
+                <div class="column">
+                    <asset:image src="hotelIcon.png" class="listPic"/>
+                </div>
+                <div class="column">
                     <p class="listParam" id="name${hotel.getId()}">${hotel.getHotelName()}</p>
                     <p class="listParam" id="country${hotel.getId()}" countryId=${hotel.getHotelCountry().getId()}>${hotel.getHotelCountry().getCountryName()}
-                    <p class="listParam" id="stars${hotel.getId()}">${hotel.getHotelStars()}</p>
+                    <div class="listParam" id="stars${hotel.getId()}">
+                        <g:each in="${(1..hotel.getHotelStars()).toList()}" >
+                            <asset:image style="width: 10px" src="star.png" />
+                        </g:each>
+                    </div>
                     <p class="listParam" id="url${hotel.getId()}" >${hotel.getHotelUrl()}</p>
+                </div>
+                <div class="column">
+                    <p class="listParam" name="redactOld" onclick="openForm(this)" style="color: green">Редактировать</p>
+                    <p class="listParam" onclick="del(this)" style="color: red" >Удалить</p>
+                </div>
+            </div>
 
-                    <p class="listParam" name="redactOld" onclick="openForm(this)">Редактировать</p>
-                    <p class="listParam" onclick="del(this)">Удалить</p>
-                </li>
+        </g:each>
 
-            </g:each>
-        </ul>
         <div class="paginationMenu">
             <button class="paginationButton" onclick="changePage('prev')"><</button>
             <button class="paginationButton" onclick="changePage('next')">> </button>
         </div>
     </div>
+    <div style="text-align: center;">
+        <button class="saveButton" name="createNew" id="openModal" onclick="openForm(this)">Добавить новый отель</button>
+    </div>
 
-    <button name="createNew" id="openModal" onclick="openForm(this)">Добавить новый отель</button>
 
     <div id="modal" class="modal">
         <div class="modal-content">

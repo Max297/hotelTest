@@ -7,29 +7,38 @@
 </head>
 
 <asset:stylesheet src="apiPages.css"/>
-<div id="content" role="main">
+
+<div id="content" role="main" class="listCont">
     <section class="row colset-2-its">
         <h1>Список стран </h1>
     </section>
     <div>
-        <ul>
+
         <g:each in="${countries}" var="country">
-            <li class="listElem" id="${country.getId()}">
-                <p class="listParam" id="name${country.getId()}">${country.getCountryName()}</p>
-                <p class="listParam" id="capital${country.getId()}">${country.getCountryCapital()}</p>
-                <p class="listParam" name="redactOld" onclick="openForm(this)">Редактировать</p>
-                <p class="listParam" onclick="del(this)">Удалить</p>
-            </li>
+            <div class="listElem" id="${country.getId()}">
+                <div class="column">
+                    <asset:image src="country.png" class="listPic"/>
+                </div>
+                <div class="column">
+                    <p class="listParam" id="name${country.getId()}">${country.getCountryName()}</p>
+                    <p class="listParam" id="capital${country.getId()}">${country.getCountryCapital()}</p>
+                </div>
+                <div class="column">
+                    <p class="listParam" name="redactOld" onclick="openForm(this)" style="color: green">Редактировать</p>
+                    <p class="listParam" onclick="del(this)" style="color: red">Удалить</p>
+                </div>
+            </div>
 
         </g:each>
-        </ul>
+
         <div class="paginationMenu">
             <button class="paginationButton" onclick="changePage('prev')"><</button>
             <button class="paginationButton" onclick="changePage('next')">> </button>
         </div>
     </div>
-
-    <button name="createNew" id="openModal" onclick="openForm(this)">Добавить новую страну</button>
+    <div style="text-align: center;">
+        <button class="saveButton" name="createNew" id="openModal" onclick="openForm(this)">Добавить новую страну</button>
+    </div>
 
     <div id="modal" class="modal">
         <div class="modal-content">
