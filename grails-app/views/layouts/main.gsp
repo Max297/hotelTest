@@ -10,57 +10,27 @@
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
     <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="mainPages.css"/>
 
     <g:layoutHead/>
 </head>
 
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <ul style="color: white">
-        <li>
-            <a href="http://localhost:8080">Страница поиска</a>
-        </li>
-        <li>
-            <a href="http://localhost:8080/countryPage">Список стран</a>
-        </li>
-        <li>
-            <a href="http://localhost:8080/hotelPage">Список отелей</a>
-        </li>
-        <li>
-            <a href="http://localhost:8080/h2-console/">Консоль h2</a>
-        </li>
-
-    </ul>
-
-</nav>
-
+<body class="bodyStyle">
+<div class="headerPanel">
+    <a href="http://localhost:8080">Страница поиска</a>
+    <a href="http://localhost:8080/countryPage">Список стран</a>
+    <a href="http://localhost:8080/hotelPage">Список отелей</a>
+    <a href="http://localhost:8080/h2-console/">Консоль h2</a>
+</div>
+<div class="bodyCont">
 <g:layoutBody/>
-
-<div class="footer row" role="contentinfo">
-    <div class="col">
-        <a href="http://guides.grails.org" target="_blank">
-            <asset:image src="advancedgrails.svg" alt="Grails Guides" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="http://guides.grails.org" target="_blank">Grails Guides</a></strong>
-        <p>Building your first Grails app? Looking to add security, or create a Single-Page-App? Check out the <a href="http://guides.grails.org" target="_blank">Grails Guides</a> for step-by-step tutorials.</p>
-
-    </div>
-    <div class="col">
-        <a href="http://docs.grails.org" target="_blank">
-            <asset:image src="documentation.svg" alt="Grails Documentation" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="http://docs.grails.org" target="_blank">Documentation</a></strong>
-        <p>Ready to dig in? You can find in-depth documentation for all the features of Grails in the <a href="http://docs.grails.org" target="_blank">User Guide</a>.</p>
-
-    </div>
-
-    <div class="col">
-        <a href="https://grails-slack.cfapps.io" target="_blank">
-            <asset:image src="slack.svg" alt="Grails Slack" class="float-left"/>
-        </a>
-        <strong class="centered"><a href="https://grails-slack.cfapps.io" target="_blank">Join the Community</a></strong>
-        <p>Get feedback and share your experience with other Grails developers in the community <a href="https://grails-slack.cfapps.io" target="_blank">Slack channel</a>.</p>
+</div>
+<div class="footerSite" role="contentinfo">
+    <p>Наши контакты</p>
+    <div>
+        <asset:image class="footerImages" src="contactIcons/vk.png" />
+        <asset:image class="footerImages" src="contactIcons/wa.png" />
+        <asset:image class="footerImages" src="contactIcons/tg.png" />
     </div>
 </div>
 
