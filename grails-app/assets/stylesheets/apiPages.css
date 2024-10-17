@@ -1,3 +1,25 @@
+.saveButton{
+    background-color: #06D6A0;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 12px;
+}
+
+
+
+.listPic{
+    width: 50px;
+}
+.column {
+    float: left;
+    width: 33.33%;
+}
 .paginationButton{
     font-size: 32px;
     background: none;
@@ -10,8 +32,12 @@
     margin-right: auto;
 }
 .listElem{
+
     display: flex;
+    margin-top: 15px;
+    border-bottom: 1rem solid #F3B61F;
 }
+
 .listParam{
     margin-left: 5px;
     margin-right: 5px;

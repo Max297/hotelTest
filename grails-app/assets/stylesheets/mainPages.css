@@ -1,0 +1,54 @@
+.footerSite{
+    text-align: center;
+
+
+    color: white;
+}
+.footerImages{
+    width: 50px
+}
+
+.headerPanel {
+
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.headerPanel a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.headerPanel a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.bodyStyle{
+    background-color: #292F36;
+}
+.bodyCont{
+    min-height: 50%;
+    background-color: #2E86AB;
+}
+.listCont{
+    min-height: 100%;
+    margin: 0 25%;
+    background-color: #F7F4F3 !important;
+}
+.searchButton{
+    background-color: #06D6A0;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 12px;
+}
