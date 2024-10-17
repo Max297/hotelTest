@@ -4,56 +4,30 @@ const modal = document.getElementById("modal");
 const span = document.getElementById("closeModal");
 
 
-var perPage=3
-var numberShown=0
+
 function changePage(type){
-    let elems=document.getElementsByClassName("listElem")
-    console.log(numberShown)
-    let newNum=numberShown
-    if (type=="next" && numberShown<elems.length )  {
-        newNum+=perPage
-        for(let i=0;i<elems.length;i++){
 
-            if (i>=numberShown && i<newNum){
-
-                elems[i].style.display=""
-            }
-            else{
-                elems[i].style.display="none"
-            }
-        }
+    let curPage=new URLSearchParams(window.location.search).get('page')
+    if (curPage==null){
+        curPage=1
+    }
+    curPage=parseInt(curPage)
+    if (type=="next"  )  {
+        curPage+=1
+        window.location.href = "http://localhost:8080/countryPage?page="+curPage;
 
     }
-    else if (type=="prev" && numberShown>perPage){
-        newNum-=perPage
-        console.log(newNum)
-        for(let i=0;i<elems.length;i++){
-            if (i<newNum && i>=newNum-perPage){
-                elems[i].style.display=""
-            }
-            else{
-                elems[i].style.display="none"
-            }
+    else {
+        if (curPage!=1){
+            curPage-=1
         }
+        window.location.href = "http://localhost:8080/countryPage?page="+curPage;
     }
-    else if(type=="refresh"){
-        for(let i=0;i<elems.length;i++){
-
-            if (i>=numberShown-perPage && i<numberShown){
-
-                elems[i].style.display=""
-            }
-            else{
-                elems[i].style.display="none"
-            }
-        }
-    }
-    numberShown=newNum
 
 
 }
 
-changePage("next")
+
 
 
 // Закрыть модальное окно при нажатии на (x)
@@ -72,9 +46,9 @@ function openForm(elem){
     modal.style.display = "block";
 
     if (elem.getAttribute("name")=="redactOld"){
-        document.getElementById("name").value=document.getElementById("name"+elem.parentElement.id).innerHTML
-        document.getElementById("capital").value=document.getElementById("capital"+elem.parentElement.id).innerHTML
-        document.getElementById("createId").value=elem.parentElement.id
+        document.getElementById("name").value=document.getElementById("name"+elem.parentElement.parentElement.id).innerHTML
+        document.getElementById("capital").value=document.getElementById("capital"+elem.parentElement.parentElement.id).innerHTML
+        document.getElementById("createId").value=elem.parentElement.parentElement.id
 
     }
     else{
@@ -129,11 +103,10 @@ function del(elem){
         dataType:"json",
         url: '/country/delete',
         data: {
-            id: elem.parentElement.id
+            id: elem.parentElement.parentElement.id
         },
         success: function (data, status, xhr) {
-            elem.parentElement.remove()
-            changePage('refresh')
+            window.location.href = "http://localhost:8080/countryPage";
         }
     });
 }
