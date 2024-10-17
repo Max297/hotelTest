@@ -6,7 +6,7 @@ class PagesController {
     def hotelService;
 
     def index() {
-        def found= countryService.findAll()
+        def found= countryService.getAllForList()
 
 
         respond([countries: found])
@@ -31,14 +31,23 @@ class PagesController {
 
     }
     def hotelPage(){
-        def found=hotelService.findAll();
+        Integer page=1
+        if (params.containsKey("page")){
+            page=params.page as Integer;
+        }
+        def found=hotelService.findAll(page);
 
-        def countries= countryService.findAll()
+        def countries= countryService.getAllForList()
 
         respond([hotels: found, countries: countries, dbCall:Country])
     }
     def countryPage(){
-        def found= countryService.findAll()
+        Integer page=1
+        if (params.containsKey("page")){
+            page=params.page as Integer;
+        }
+
+        def found= countryService.findAll(page)
 
 
         respond([countries: found])
