@@ -78,9 +78,14 @@ class HotelService {
         }
         return result
     }
-    List <Hotel> findAll(){
+    List <Hotel> findAll(Integer page){
+        Integer pageLimit=3
+        Integer limit=(page-1)*pageLimit
         def findCriteria= Hotel.createCriteria()
-        def result =findCriteria.list {}
+        def result =findCriteria.list {
+            firstResult(limit)
+            maxResults(pageLimit)
+        }
 
         return result
     }

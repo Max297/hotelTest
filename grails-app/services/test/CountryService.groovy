@@ -30,19 +30,33 @@ class CountryService {
         def result =findCriteria.get {idEq(countryId)};
         result.setCountryName(name)
         result.setCountryCapital(capital)
-        if (!newCountry.validate()) {
+        if (!result.validate()) {
             return "validation failed"
         }
         else{
-            newCountry.save(flush: true)
+            result.save(flush: true)
             return "saved"
         }
 
     }
 
-    List <Country> findAll(){
+    List <Country> findAll(Integer page){
+        Integer pageLimit=3
+        Integer limit=(page-1)*pageLimit
         def findCriteria= Country.createCriteria()
-        def result =findCriteria.list {}
+        def result =findCriteria.list {
+            firstResult(limit)
+            maxResults(page*pageLimit)
+        }
+
+        return result
+    }
+    List <Country> getAllForList(){
+
+        def findCriteria= Country.createCriteria()
+        def result =findCriteria.list {
+
+        }
 
         return result
     }
